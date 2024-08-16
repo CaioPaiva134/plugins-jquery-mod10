@@ -13,19 +13,13 @@ $(document).ready(function () {
 
     $('#form').validate({
         rules: {
-            nome: "required",
-            email: {
-                required: true,
-                email: true
+            nome: { required: true },
+            email: { required: true, email: true },
+            telefone: { required: true },
+            cpf: { required: true },
+            endereco: { required: true },
+            cep: { required: true },
             },
-            telefone: "required",
-            cpf: {
-                required: true,
-                cpfBR: true 
-            },
-            endereco: "required",
-            cep: "required"
-        },
         messages: {
             nome: "Por favor, informe seu nome completo",
             email: "Por favor, informe um endereço de e-mail válido",
@@ -34,7 +28,16 @@ $(document).ready(function () {
             endereco: "Por favor, informe seu endereço completo",
             cep: "Por favor, informe um CEP válido"
         },
-        errorElement: "div",
-        errorLabelContainer: ".error"
+
+        submitHandler: function (form) {
+            alert('Cadastro concluído com sucesso!');
+            form.reset();
+        },
+        invalidHandler: function (evento, validador) {
+            let camposIncorretos = validador.numberOfInvalids();
+            if (camposIncorretos) {
+            alert(`Existem ${camposIncorretos} campos incorretos ou vazios`);
+            }
+        },
     });
 });
